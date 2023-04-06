@@ -1,8 +1,9 @@
-if getgenv().syn and getgenv().syn.run_on_actor then
-    for _,v in pairs(getactors())do
-            syn.run_on_actor(v,[[
-                -- UI
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Mick-gordon/Blackout-Script-Development/main/Main%20Files%20for%20the%20Butt"))()
+local function find_by_name(t, name) for _, v in pairs(t) do if v.name == name then return v end end end
+
+local actor = find_by_name(getactors(), 'lol')
+syn.run_on_actor(actor,[[          
+    -- UI
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Mick-gordon/Blackout-Script-Development/main/Main%20Files%20for%20the%20Butt "))()
 local Ui = loadstring(game:HttpGet("https://raw.githubusercontent.com/Mick-gordon/Blackout-Script-Development/main/Main%20UI"))()
 local Ui = Library
 local LoadTime = tick()
@@ -162,6 +163,4 @@ Window:SwitchTab(LegitTab)
 Window.ToggleAnime(false)
 
 LoadTime = math.floor((tick() - LoadTime) * 1000)
-            ]])
-    end
-end 
+]])
