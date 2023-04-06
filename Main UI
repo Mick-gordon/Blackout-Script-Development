@@ -19,8 +19,8 @@ local InputGUI = Instance.new("ScreenGui", CoreGui)
 local Library = {
     Theme = {
         Accent = {
-            Color3.fromHex("#660065"), --102, 0, 101 // #660065
-            Color3.fromRGB(102, 0, 101), 
+            Color3.fromHex("#00ffc1"), --0, 255, 193 // #00ffc1
+            Color3.fromRGB(0, 255, 193), 
 
             Color3.fromRGB(114, 0, 198),
             Color3.fromRGB(139, 130, 185),
@@ -341,7 +341,7 @@ do
             Max = 2, Current = 0
         }
         --
-        Library.Theme.Logo = Utility.AddImage("Blackout_Script_Development_PF/Assets/UI/Logo2.png", "https://raw.githubusercontent.com/Mick-gordon/Pink-/main/image_2023-04-06_100644500(1).png") -- Main Start Up logo MSL1
+        Library.Theme.Logo = Utility.AddImage("Blackout_Script_Development_PF/Assets/UI/Logo2.png", "https://raw.githubusercontent.com/Mick-gordon/Blackout-Script-Development/main/Blackout_Script_Development.png") -- Main Start Up logo MSL1
         --
         local WindowOutline = Utility.AddDrawing("Square", {
             Size = WindowSize,
