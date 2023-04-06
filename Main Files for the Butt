@@ -1,7 +1,4 @@
-if getgenv().syn and getgenv().syn.run_on_actor then
-    for _,v in pairs(getactors())do
-            syn.run_on_actor(v,[[
-                -- The options 
+-- The options 
 
 _G.SilentAim={
   Enabled       = false,
@@ -15,12 +12,12 @@ _G.SilentAim={
   GunName       = "Cant Find The Gun!!!!!"
 }
 _G.AimAssist={ 
-  Enabled      = true,
+  Enabled      = false,
   Target       =torso,
   VisibleCheck = false,
   Smoothness   = 10,
   FOV          = 400,
-  Show_FOV     = true,
+  Show_FOV     = false,
   FOV_Color    = Color3.fromRGB(75,0,130), 
   Keything     = "MouseButton2"
 }
@@ -375,6 +372,3 @@ RunService.RenderStepped:Connect(function()
 end)
 
 --
-            ]])
-    end
-end 
