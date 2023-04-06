@@ -1,4 +1,8 @@
--- UI
+local function find_by_name(t, name) for _, v in pairs(t) do if v.name == name then return v end end end
+
+local actor = find_by_name(getactors(), 'lol')
+syn.run_on_actor(getactors()[1], [[    
+    -- UI
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Mick-gordon/Blackout-Script-Development/main/Main%20Files%20for%20the%20Butt "))()
 
 
@@ -457,7 +461,8 @@ ESPSec:Slider({
         Sense.teamSettings.enemy.offScreenArrowRadius=vfdsvcx
     end
 })
- 
+
+
 -- Other Tab
 
 local OtherTab = Window:Tab("Other")
@@ -471,3 +476,4 @@ Window.ToggleAnime(false)
 LoadTime = math.floor((tick() - LoadTime) * 1000)
 
 Sense.Load()
+]])
