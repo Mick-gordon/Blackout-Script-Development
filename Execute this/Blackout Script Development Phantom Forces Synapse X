@@ -171,9 +171,107 @@ AimAssistSection:Dropdown({
     end
 })
 
-
 --Rage Tab
 local RageTab = Window:Tab("Rage")
+local GunOptiuons = RageTab:Section(
+    "Gun Mods", 
+    "Right",
+)
+GunOptiuons:Toggle({
+    Title = "Enable", 
+    Flag = "EGM1",
+    Callback = function(EGM)
+        _G.GunOptins.Enabled=EGM
+    end
+})
+GunOptiuons:Toggle({
+    Title = "Instant Animations", 
+    Flag = "IGMA",
+    Callback = function(IRAGM)
+        _G.GunOptins.Animation=IRAGM
+        _G.GunOptins.Reset=IRAGM
+    end
+})
+GunOptiuons:Toggle({
+    Title = "No Sway", 
+    Flag = "NWGM",
+    Callback = function(GMNS)
+        _G.GunOptins.Sway=GMNS
+    end
+})
+GunOptiuons:Toggle({
+    Title = "Static X", 
+    Flag = "GMSX",
+    Callback = function(SXGM)
+        _G.GunOptins.StaticX=SXGM
+    end
+})
+GunOptiuons:Toggle({
+    Title = "Static Y", 
+    Flag = "GMSY",
+    Callback = function(SYGM)
+        _G.GunOptins.StaticY=SYGM
+    end
+})
+GunOptiuons:Toggle({
+    Title = "Static Z", 
+    Flag = "GMSZ",
+    Callback = function(SZGM)
+        _G.GunOptins.StaticZ=SZGM
+    end
+})
+
+local PlayerMovement = RageTab:Section(
+    "Player Movemnt", 
+    "Left",
+)
+PlayerMovement:Toggle({
+    Title = "Enable", 
+    Flag = "EPM",
+    Callback = function(EPM1)
+        _G.PlayerMove.Enabled=EPM1
+    end
+})
+PlayerMovement:Toggle({
+    Title = "Jump Power", 
+    Flag = "JPE1",
+    Callback = function(JPE)
+        _G.PlayerMove.JP=JPE
+    end
+})
+PlayerMovement:Slider({
+    Title = "Jump Power", 
+    Flag = "JPS", 
+    Symbol = "", 
+    Default = 40, 
+    Min = 0, 
+    Max = 250, 
+    Decimals = 1,
+    Callback = function(JPS1)
+        _G.PlayerMove.JPV=JPS1
+    end
+})
+PlayerMovement:Toggle({
+    Title = "Walk Speed", 
+    Flag = "WSPGM",
+    Callback = function(WSPM)
+        _G.PlayerMove.WS=WSPM
+    end
+})
+PlayerMovement:Slider({
+    Title = "Walk Speed", 
+    Flag = "JPS23s", 
+    Symbol = "", 
+    Default = 16, 
+    Min = 0, 
+    Max = 100, 
+    Decimals = 1,
+    Callback = function(JPS1)
+        _G.PlayerMove.WSV=JPS1
+    end
+})
+
+-- Visuals Tab
 
 local VisualsTab = Window:Tab("Visuals")
 
