@@ -284,5 +284,4 @@ Window:SwitchTab(LegitTab)
 Window.ToggleAnime(false)
 
 LoadTime = math.floor((tick() - LoadTime) * 1000)
-
 ]])
