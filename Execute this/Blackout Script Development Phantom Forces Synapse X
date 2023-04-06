@@ -1,8 +1,4 @@
-local function find_by_name(t, name) for _, v in pairs(t) do if v.name == name then return v end end end
-
-local actor = find_by_name(getactors(), 'lol')
-syn.run_on_actor(getactors()[1], [[    
-    -- UI
+-- UI
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Mick-gordon/Blackout-Script-Development/main/Main%20Files%20for%20the%20Butt "))()
 
 
@@ -443,7 +439,7 @@ ESPSec:Slider({
     Symbol = "", 
     Default = 15, 
     Min = 0, 
-    Max = 1000, 
+    Max = 100, 
     Decimals = 1,
     Callback = function(dsafsfs)
         Sense.teamSettings.enemy.offScreenArrowSize=dsafsfs
@@ -475,4 +471,3 @@ Window.ToggleAnime(false)
 LoadTime = math.floor((tick() - LoadTime) * 1000)
 
 Sense.Load()
-]])
