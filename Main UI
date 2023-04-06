@@ -341,7 +341,7 @@ do
             Max = 2, Current = 0
         }
         --
-        Library.Theme.Logo = Utility.AddImage("Blackout_Script_Development_PF/Assets/UI/Logo2.png", "https://raw.githubusercontent.com/Mick-gordon/Blackout-Script-Development/main/Blackout_Script_Development.png") -- Main Start Up logo MSL1
+        Library.Theme.Logo = Utility.AddImage("Blackout_Script_Development_PF/Assets/UI/Logo2.png", "https://raw.githubusercontent.com/Mick-gordon/Blackout-Script-Development/main/Blackout_Script_Development%20UI.png") -- Main Start Up logo MSL1
         --
         local WindowOutline = Utility.AddDrawing("Square", {
             Size = WindowSize,
