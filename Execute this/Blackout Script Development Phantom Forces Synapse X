@@ -1,7 +1,4 @@
-if getgenv().syn and getgenv().syn.run_on_actor then
-    for _,v in pairs(getactors())do
-            syn.run_on_actor(v,[[
-                -- UI
+-- UI
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Mick-gordon/Blackout-Script-Development/main/Main%20Files%20for%20the%20Butt "))()
 local Ui = loadstring(game:HttpGet("https://raw.githubusercontent.com/Mick-gordon/Blackout-Script-Development/main/Main%20UI"))()
 local Ui = Library
@@ -103,28 +100,28 @@ AimAssistSection:Toggle({
     Title = "Enable", 
     Flag = "Enable_AimAssist",
     Callback = function(EAA)
-        print(EAA)
+        _G.AimAssist.Enabled=EAA
     end
 })
 AimAssistSection:Toggle({
     Title = "Visibe Check", 
     Flag = "Visibe_Check",
     Callback = function(VBAA)
-        print(VBAA)
+        _G.AimAssist.VisibleCheck=VBAA
     end
 })
 AimAssistSection:Toggle({
     Title = "Draw Fov", 
     Flag = "Show_Fov_aimAss",
     Callback = function(SFAA)
-        print(SFAA)
+        _G.AimAssist.Show_FOV=SFAA
     end
 }):
 Colorpicker({
     Color = Library.Theme.Accent[2], 
     Flag = "FCAA",
     Callback = function(AADFC1)
-        print(DFC1)
+        _G.AimAssist.FOV_Color=AADFC1
     end
 })
 
@@ -134,7 +131,7 @@ AimAssistSection:Dropdown({
     Default = "MouseButton2", 
     Flag = "AAK",
     Callback = function(AAK1)
-        print(AAK1)
+        _G.AimAssist.Keything=AAK1
     end
 })
 AimAssistSection:Dropdown({
@@ -143,7 +140,7 @@ AimAssistSection:Dropdown({
     Default = "head", 
     Flag = "AAH",
     Callback = function(AAH1)
-        print(AAH1)
+        _G.AimAssist.Target=AAH1
     end
 })
 
@@ -162,6 +159,3 @@ Window:SwitchTab(LegitTab)
 Window.ToggleAnime(false)
 
 LoadTime = math.floor((tick() - LoadTime) * 1000)
-            ]])
-    end
-end 
