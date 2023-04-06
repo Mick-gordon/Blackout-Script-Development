@@ -10,15 +10,17 @@ _G.PlayerMove={
   WSV=16, -- HEHE HA HA 100
   NF=false, --No Fall Damage 
 }
-_G.GunOptins = {
+
+_G.GunOptins={
   Enabled   = false,
   Animation = false,
   Reset     = false,
-  Sway      = false.
+  Sway      = false,
   StaticX   = false,
   StaticY   = false,
   StaticZ   = false,
 }
+
 _G.SilentAim={
   Enabled       = false,
   Target        = {"Head"},
@@ -28,8 +30,9 @@ _G.SilentAim={
   Show_Fov      = false,
   Fov_Color     = Color3.fromRGB(102, 0, 101),
   Ignore_Fov    = false,
-  GunName       = "Cant Find The Gun!!!!!"
+  GunName       = "Cant Find The Gun!!!!!",
 }
+
 _G.AimAssist={ 
   Enabled      = false,
   Target       =torso,
@@ -38,7 +41,7 @@ _G.AimAssist={
   FOV          = 400,
   Show_FOV     = false,
   FOV_Color    = Color3.fromRGB(75,0,130), 
-  Keything     = "MouseButton2"
+  Keything     = "MouseButton2",
 }
 
 -- Bullet Redirect
