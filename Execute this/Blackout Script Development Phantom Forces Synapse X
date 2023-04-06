@@ -140,7 +140,7 @@ AimAssistSection:Dropdown({
 AimAssistSection:Dropdown({
     Title = "Hit Scan", 
     List = {"head", "torso"}, 
-    Default = "head", 
+    Default = "torso", 
     Flag = "AAH",
     Callback = function(AAH1)
         _G.AimAssist.Target=AAH1
