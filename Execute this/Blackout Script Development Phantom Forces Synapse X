@@ -309,105 +309,105 @@ ESPSec:Toggle({
 })
 ESPSec:Toggle({
     Title = "Draw Boxes", 
-    Flag = "DBESP"
+    Flag = "DBESP",
     Callback = function(DBESP)
         Sense.teamSettings.enemy.box=EESP1
     end
 }):
 Colorpicker({
     Color = Library.Theme.Accent[2], 
-    Flag = "Toggle2Color"
+    Flag = "Toggle2Color",
     Callback = function(EESP1)
         Sense.teamSettings.enemy.boxColor[1]=EESP1
     end
 })
 ESPSec:Toggle({
     Title = "Fill Boxes", 
-    Flag = "FBESP"
+    Flag = "FBESP",
     Callback = function(FBESP1)
         Sense.teamSettings.enemy.boxFill=FBESP1
     end
 }):
 Colorpicker({
     Color = Library.Theme.Accent[2], 
-    Flag = "Toggle3Color"
+    Flag = "Toggle3Color",
     Callback = function(EESPColor)
         Sense.teamSettings.enemy.boxFillColor[1]=EESPColor
     end
 })
 ESPSec:Toggle({
     Title = "Draw Health Bar", 
-    Flag = "DHB2"
+    Flag = "DHB2",
     Callback = function(DHB2f)
         Sense.teamSettings.enemy.healthBar=DHB2f
     end
 })
 ESPSec:Toggle({
     Title = "Health Text", 
-    Flag = "HTESP"
+    Flag = "HTESP",
     Callback = function(HTESP23)
         Sense.teamSettings.enemy.healthText=HTESP23
     end
 }):
 Colorpicker({
     Color = Library.Theme.Accent[2], 
-    Flag = "HTESP6"
+    Flag = "HTESP6",
     Callback = function(ESPTColor)
         Sense.teamSettings.enemy.healthTextColor[1]=ESPTColor
     end
 })
 ESPSec:Toggle({
     Title = "Box 3D", 
-    Flag = "BthreeD"
+    Flag = "BthreeD",
     Callback = function(BTd)
         Sense.teamSettings.enemy.box3d=BTd
     end
 }):
 Colorpicker({
     Color = Library.Theme.Accent[2], 
-    Flag = "HTESPf6"
+    Flag = "HTESPf6",
     Callback = function(ESdsPTColor)
         Sense.teamSettings.enemy.box3dColor[1]=ESdsPTColor
     end
 })
 ESPSec:Toggle({
     Title = "Draw Name", 
-    Flag = "DNC"
+    Flag = "DNC",
     Callback = function(DNColor)
         Sense.teamSettings.enemy.name=DNColor
     end
 }):
 Colorpicker({
     Color = Library.Theme.Accent[2], 
-    Flag = "DNC"
+    Flag = "DNC",
     Callback = function(DNCesp)
         Sense.teamSettings.enemy.nameColor[1]=DNCesp
     end
 })
 ESPSec:Toggle({
     Title = "Draw Gun", 
-    Flag = "DGC"
+    Flag = "DGC",
     Callback = function(DGESP)
         Sense.teamSettings.enemy.weapon=DGESP
     end
 }):
 Colorpicker({
     Color = Library.Theme.Accent[2], 
-    Flag = "DGColor"
+    Flag = "DGColor",
     Callback = function(DGcolor)
         Sense.teamSettings.enemy.weaponColor[1]=DGcolor
     end
 })
 ESPSec:Toggle({
     Title = "Draw Tracers", 
-    Flag = "DGdC"
+    Flag = "DGdC",
     Callback = function(DTESP)
         Sense.teamSettings.enemy.tracer=DTESP
     end
 }):
 Colorpicker({
     Color = Library.Theme.Accent[2], 
-    Flag = "DGColor"
+    Flag = "DGColor",
     Callback = function(DGcolor)
         Sense.teamSettings.enemy.tracerColor[1]=DGcolor
     end
@@ -423,14 +423,14 @@ ESPSec:Dropdown({
 })
 ESPSec:Toggle({
     Title = "Draw Off Screen Arrow", 
-    Flag = "DOFAES"
+    Flag = "DOFAES",
     Callback = function(DOFAESp)
         Sense.teamSettings.enemy.offScreenArrow=DOFAESp
     end
 }):
 Colorpicker({
     Color = Library.Theme.Accent[2], 
-    Flag = "DGColofdfr"
+    Flag = "DGColofdfr",
     Callback = function(DGColofdfrsf)
         Sense.teamSettings.enemy.offScreenArrowColor[1]=DGColofdfrsf
     end
