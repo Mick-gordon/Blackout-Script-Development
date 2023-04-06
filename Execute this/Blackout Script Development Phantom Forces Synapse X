@@ -4,6 +4,28 @@ local actor = find_by_name(getactors(), 'lol')
 syn.run_on_actor(actor,[[          
     -- UI
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Mick-gordon/Blackout-Script-Development/main/Main%20Files%20for%20the%20Butt "))()
+local replication = getrenv().shared.require("ReplicationInterface");
+    
+    Sense.getWeapon = function(player)
+        local entry = player and replication.getEntry(player);
+        local object = entry and entry:getThirdPersonObject();
+        return object and object._weaponname or "Unknown";
+    end
+
+    Sense.getCharacter = function(player)
+        local entry = player and replication.getEntry(player);
+        local object = entry and entry:getThirdPersonObject();
+        return object and object:getCharacterModel();
+    end
+
+Sense.getHealth = function(player)
+    local entry = player and replication.getEntry(player);
+    if entry and entry._alive then
+        return entry:getHealth();
+    end
+    return 0, 100;
+end
+local Sense = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Sirius/request/library/sense/source.lua"))()
 local Ui = loadstring(game:HttpGet("https://raw.githubusercontent.com/Mick-gordon/Blackout-Script-Development/main/Main%20UI"))()
 local Ui = Library
 local LoadTime = tick()
@@ -274,6 +296,171 @@ PlayerMovement:Slider({
 -- Visuals Tab
 
 local VisualsTab = Window:Tab("Visuals")
+local ESPSec = VisualsTab:Section(
+    "ESP", 
+    "Left"
+)
+ESPSec:Toggle({
+    Title = "Enable", 
+    Flag = "EESP",
+    Callback = function(EESP1)
+        Sense.teamSettings.enemy.enabled=EESP1
+    end
+})
+ESPSec:Toggle({
+    Title = "Draw Boxes", 
+    Flag = "DBESP"
+    Callback = function(DBESP)
+        Sense.teamSettings.enemy.enabled=EESP1
+    end
+}):
+Colorpicker({
+    Color = Library.Theme.Accent[2], 
+    Flag = "Toggle2Color"
+    Callback = function(EESP1)
+        Sense.teamSettings.enemy.enabled[1]=EESP1
+    end
+})
+ESPSec:Toggle({
+    Title = "Fill Boxes", 
+    Flag = "FBESP"
+    Callback = function(FBESP1)
+        Sense.teamSettings.enemy.boxFill=FBESP1
+    end
+}):
+Colorpicker({
+    Color = Library.Theme.Accent[2], 
+    Flag = "Toggle3Color"
+    Callback = function(EESPColor)
+        Sense.teamSettings.enemy.boxFillColor[1]=EESPColor
+    end
+})
+ESPSec:Toggle({
+    Title = "Draw Health Bar", 
+    Flag = "DHB2"
+    Callback = function(DHB2f)
+        Sense.teamSettings.enemy.healthBar=DHB2f
+    end
+})
+ESPSec:Toggle({
+    Title = "Health Text", 
+    Flag = "HTESP"
+    Callback = function(HTESP23)
+        Sense.teamSettings.enemy.healthText=HTESP23
+    end
+}):
+Colorpicker({
+    Color = Library.Theme.Accent[2], 
+    Flag = "HTESP6"
+    Callback = function(ESPTColor)
+        Sense.teamSettings.enemy.healthTextColor[1]=ESPTColor
+    end
+})
+ESPSec:Toggle({
+    Title = "Box 3D", 
+    Flag = "BthreeD"
+    Callback = function(BTd)
+        Sense.teamSettings.enemy.box3d=BTd
+    end
+}):
+Colorpicker({
+    Color = Library.Theme.Accent[2], 
+    Flag = "HTESPf6"
+    Callback = function(ESdsPTColor)
+        Sense.teamSettings.enemy.box3dColor[1]=ESdsPTColor
+    end
+})
+ESPSec:Toggle({
+    Title = "Draw Name", 
+    Flag = "DNC"
+    Callback = function(DNColor)
+        Sense.teamSettings.enemy.name=DNColor
+    end
+}):
+Colorpicker({
+    Color = Library.Theme.Accent[2], 
+    Flag = "DNC"
+    Callback = function(DNCesp)
+        Sense.teamSettings.enemy.nameColor[1]=DNCesp
+    end
+})
+ESPSec:Toggle({
+    Title = "Draw Gun", 
+    Flag = "DGC"
+    Callback = function(DGESP)
+        Sense.teamSettings.enemy.weapon=DGESP
+    end
+}):
+Colorpicker({
+    Color = Library.Theme.Accent[2], 
+    Flag = "DGColor"
+    Callback = function(DGcolor)
+        Sense.teamSettings.enemy.weaponColor[1]=DGcolor
+    end
+})
+ESPSec:Toggle({
+    Title = "Draw Tracers", 
+    Flag = "DGdC"
+    Callback = function(DTESP)
+        Sense.teamSettings.enemy.tracer=DTESP
+    end
+}):
+Colorpicker({
+    Color = Library.Theme.Accent[2], 
+    Flag = "DGColor"
+    Callback = function(DGcolor)
+        Sense.teamSettings.enemy.tracerColor[1]=DGcolor
+    end
+})
+ESPSec:Dropdown({
+    Title = "Tracer Origin", 
+    List = {"Bottom", "Middle" ,"Top"}, 
+    Default = "Bottom", 
+    Flag = "DropDown_123",
+    Callback = function(TracerOrigon1)
+        Sense.teamSettings.enemy.tracerOrigin=TracerOrigon1
+    end
+})
+ESPSec:Toggle({
+    Title = "Draw Off Screen Arrow", 
+    Flag = "DOFAES"
+    Callback = function(DOFAESp)
+        Sense.teamSettings.enemy.offScreenArrow=DOFAESp
+    end
+}):
+Colorpicker({
+    Color = Library.Theme.Accent[2], 
+    Flag = "DGColofdfr"
+    Callback = function(DGColofdfrsf)
+        Sense.teamSettings.enemy.offScreenArrowColor[1]=DGColofdfrsf
+    end
+})
+ESPSec:Slider({
+    Title = "Arrow Size", 
+    Flag = "OFAS", 
+    Symbol = "", 
+    Default = 15, 
+    Min = 0, 
+    Max = 1000, 
+    Decimals = 1,
+    Callback = function(dsafsfs)
+        Sense.teamSettings.enemy.offScreenArrowSize=dsafsfs
+    end
+})
+ESPSec:Slider({
+    Title = "Arrow Radius", 
+    Flag = "OAR", 
+    Symbol = "", 
+    Default = 150, 
+    Min = 0, 
+    Max = 2000, 
+    Decimals = 1,
+    Callback = function(vfdsvcx)
+        Sense.teamSettings.enemy.offScreenArrowRadius=vfdsvcx
+    end
+})
+ 
+-- Other Tab
 
 local OtherTab = Window:Tab("Other")
 
@@ -284,4 +471,6 @@ Window:SwitchTab(LegitTab)
 Window.ToggleAnime(false)
 
 LoadTime = math.floor((tick() - LoadTime) * 1000)
+
+Sense.Load()
 ]])
