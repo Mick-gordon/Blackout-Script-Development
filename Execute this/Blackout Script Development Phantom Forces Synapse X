@@ -2,7 +2,7 @@ if getgenv().syn and getgenv().syn.run_on_actor then
     for _,v in pairs(getactors())do
             syn.run_on_actor(v,[[
                 -- UI
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Mick-gordon/Blackout-Script-Development/main/Main%20Files%20for%20the%20Butt "))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Mick-gordon/Blackout-Script-Development/main/Main%20Files%20for%20the%20Butt"))()
 local Ui = loadstring(game:HttpGet("https://raw.githubusercontent.com/Mick-gordon/Blackout-Script-Development/main/Main%20UI"))()
 local Ui = Library
 local LoadTime = tick()
