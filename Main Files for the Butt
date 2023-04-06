@@ -1,4 +1,7 @@
--- The options 
+if getgenv().syn and getgenv().syn.run_on_actor then
+    for _,v in pairs(getactors())do
+            syn.run_on_actor(v,[[
+                -- The options 
 
 _G.SilentAim={
   Enabled       = false,
@@ -372,3 +375,6 @@ RunService.RenderStepped:Connect(function()
 end)
 
 --
+            ]])
+    end
+end 
