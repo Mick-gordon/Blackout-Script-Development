@@ -21,7 +21,6 @@ local Library = {
         Accent = {
             Color3.fromHex("#00ffc1"), --0, 255, 193 // #00ffc1
             Color3.fromRGB(0, 255, 193), 
-
             Color3.fromRGB(114, 0, 198),
             Color3.fromRGB(139, 130, 185),
             Color3.fromHex("#a83299")
@@ -3989,7 +3988,7 @@ do
                 Callback = function(Choosen)
                     if Choosen == "Default" then
                         Library:UpdateTheme({
-                            Accent = Color3.fromHex("#660065"),
+                            Accent = Color3.fromHex("#00ffc1"),
                             Outline = Color3.fromHex("#000005"),
                             Inline = Color3.fromHex("#323232"),
                             LightContrast = Color3.fromHex("#202020"),
