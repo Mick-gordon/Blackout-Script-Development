@@ -1,4 +1,5 @@
--- Bullet Redirect
+-- The options 
+
 _G.SilentAim={
   Enabled       = false,
   Target        = {"Head"},
@@ -10,6 +11,19 @@ _G.SilentAim={
   Ignore_Fov    = false,
   GunName       = "Cant Find The Gun!!!!!"
 }
+_G.AimAssist={ 
+  Enabled      = true,
+  Target       =torso,
+  VisibleCheck = false,
+  Smoothness   = 10,
+  FOV          = 400,
+  Show_FOV     = true,
+  FOV_Color    = Color3.fromRGB(75,0,130), 
+  Keything     = "MouseButton2"
+}
+
+-- Bullet Redirect
+
 game.RunService.RenderStepped:Connect(function()
     for i,v in pairs(workspace.Camera:GetChildren()) do 
         if v.Name ~= "Left Arm" and v.Name ~= "Right Arm" and v.Name ~= "neon" then 
@@ -259,4 +273,102 @@ coroutine.wrap(function()
       end)
   end
 end)()
+
+--Aim Assist
+
+local players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+
+local client = players.LocalPlayer
+local shared = getrenv().shared
+local camera = workspace.CurrentCamera
+local mouseLocation = UserInputService.GetMouseLocation
+local WorldToViewportPoint = camera.WorldToViewportPoint
+
+local replicationObject = shared.require("ReplicationObject")
+local replicationInterface = shared.require("ReplicationInterface")
+
+local function isAlive(entry)
+ return replicationObject.isAlive(entry)
+end
+
+local function isVisible(p, ...)
+ if not _G.AimAssist.VisibleCheck then
+     return true
+ end
+
+ return #camera:GetPartsObscuringTarget({ p }, { camera, client.Character, workspace.Ignore, ... }) == 0
+end
+
+local function get_closest(fov: number)
+ local targetPos: Vector3 = nil
+ local magnitude: number = fov or math.huge
+ for _, player in pairs(players:GetPlayers()) do
+     if player == client or player.Team == client.Team then
+         continue
+     end
+
+     local entry = replicationInterface.getEntry(player)
+     local character = entry and replicationObject.getThirdPersonObject(entry)
+
+     if character and isAlive(entry) then
+         local body_parts = character:getCharacterHash()
+
+         local screen_pos, on_screen = WorldToViewportPoint(camera, body_parts[_G.AimAssist.Target].Position)
+         local screen_pos_2D = Vector2.new(screen_pos.X, screen_pos.Y)
+         local new_magnitude = (screen_pos_2D - mouseLocation(UserInputService)).Magnitude
+         if
+             on_screen
+             and new_magnitude < magnitude
+             and isVisible(body_parts[_G.AimAssist.Target].Position, body_parts.torso.Parent)
+         then
+             magnitude = new_magnitude
+             targetPos = body_parts[_G.AimAssist.Target].Position
+         end
+     end
+ end
+ return targetPos
+end
+local mouse = client:GetMouse()
+local function aimAt(pos, smooth)
+ local targetPos = camera:WorldToScreenPoint(pos)
+ local mousePos = camera:WorldToScreenPoint(mouse.Hit.p)
+ mousemoverel((targetPos.X - mousePos.X) / _G.AimAssist.Smoothness, (targetPos.Y - mousePos.Y) / _G.AimAssist.Smoothness)
+end
+
+coroutine.wrap(function()
+  while wait(1)do
+      pcall(function()
+          if _G.AimAssist.Show_FOV and _G.AimAssist.Enabled then
+              local center=game.Workspace.CurrentCamera:WorldToViewportPoint(game.Workspace.CurrentCamera.CFrame.Position+game.Workspace.CurrentCamera.CFrame.LookVector)
+              local a=Drawing.new("Circle")
+              a.Visible=true
+              a.Position=Vector2.new(center.X,center.Y)
+              a.Color=_G.AimAssist.FOV_Color
+              a.Thickness=2.5
+              a.Transparency=1
+              a.NumSides=100
+              a.Radius=_G.AimAssist.FOV
+              coroutine.wrap(function()
+                  wait(1.1)
+                  a:Remove()
+              end)()
+          end
+      end)
+  end
+end)()
+
+
+RunService.RenderStepped:Connect(function()
+  if _G.AimAssist.Enabled then 
+      if UserInputService:IsMouseButtonPressed(Enum.UserInputType[_G.AimAssist.Keything]) then
+          local _pos = get_closest(_G.AimAssist.FOV)
+          if _pos then
+              aimAt(_pos, _G.AimAssist.Smoothness)
+          end
+      end
+    end
+end)
+
 --
