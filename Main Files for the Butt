@@ -85,6 +85,7 @@ local gunpendepths={None=0,["M14 BR"]=1.8,HK417=1.6,L22=0.9,["HECATE II"]=10,["M
                    if not gunpendepths[v]then
                        local depth=FindBrokenModulePenetration(i[v])
                        gunpendepths[v]=depth
+                       setclipboard(v)
                        print("Error, Missing "..v..", Error Depth Recovery Found "..depth.." As Penetration, Please Contact The Dev To Fix https://discord.gg/YcuhaRkakQ")
                    end
                end
