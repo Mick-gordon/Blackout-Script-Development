@@ -128,7 +128,30 @@ Colorpicker({
         _G.AimAssist.FOV_Color=AADFC1
     end
 })
-
+AimAssistSection:Slider({
+    Title = "Fov", 
+    Flag = "AimAssFov", 
+    Symbol = "", 
+    Default = 400, 
+    Min = 0, 
+    Max = 800, 
+    Decimals = 1,
+    Callback = function(AAF)
+        _G.AimAssist.FOV=AAF
+    end
+})
+AimAssistSection:Slider({
+    Title = "Smoothing", 
+    Flag = "AAS1", 
+    Symbol = "", 
+    Default = 10, 
+    Min = 2, 
+    Max = 50, 
+    Decimals = 0.5,
+    Callback = function(AAS)
+        _G.AimAssist.Smoothness=AAS
+    end
+})
 AimAssistSection:Dropdown({
     Title = "Aim Assist Key", 
     List = {"MouseButton1", "MouseButton2"}, 
