@@ -70,8 +70,8 @@ SectionBR:Toggle({
 SectionBR:Toggle({
     Title = "Auto Shoot", 
     Flag = "Auto_Shoot",
-    Callback = function(ASBR)
-        _G.SilentAim.Auto_Shoot=ASBR
+    Callback = function(ASBR2)
+        _G.SilentAim.Auto_Shoot=ASBR2
     end
 })
 SectionBR:Toggle({
