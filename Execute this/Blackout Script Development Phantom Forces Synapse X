@@ -175,7 +175,7 @@ AimAssistSection:Dropdown({
 local RageTab = Window:Tab("Rage")
 local GunOptiuons = RageTab:Section(
     "Gun Mods", 
-    "Right",
+    "Right"
 )
 GunOptiuons:Toggle({
     Title = "Enable", 
@@ -223,7 +223,7 @@ GunOptiuons:Toggle({
 
 local PlayerMovement = RageTab:Section(
     "Player Movemnt", 
-    "Left",
+    "Left"
 )
 PlayerMovement:Toggle({
     Title = "Enable", 
