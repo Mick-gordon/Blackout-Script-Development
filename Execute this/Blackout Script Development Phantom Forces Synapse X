@@ -443,7 +443,7 @@ ESPSec:Slider({
     Symbol = "", 
     Default = 15, 
     Min = 0, 
-    Max = 100, 
+    Max = 1000, 
     Decimals = 1,
     Callback = function(dsafsfs)
         Sense.teamSettings.enemy.offScreenArrowSize=dsafsfs
@@ -461,8 +461,7 @@ ESPSec:Slider({
         Sense.teamSettings.enemy.offScreenArrowRadius=vfdsvcx
     end
 })
-
-
+ 
 -- Other Tab
 
 local OtherTab = Window:Tab("Other")
