@@ -1,542 +1,522 @@
-local function find_by_name(t, name) for _, v in pairs(t) do if v.name == name then return v end end end
-
-local actor = find_by_name(getactors(), 'lol')
-syn.run_on_actor(getactors()[1], [[    
+syn.run_on_actor(getactors()[1], [[
     -- UI
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Mick-gordon/Blackout-Script-Development/main/Main%20Files%20for%20the%20Butt "))()
-
-
-local Sense = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Sirius/request/library/sense/source.lua"))()
-local Ui = loadstring(game:HttpGet("https://raw.githubusercontent.com/Mick-gordon/Blackout-Script-Development/main/Main%20UI"))()
-local Ui = Library
-local LoadTime = tick()
--- game specific functions
-local replication = getrenv().shared.require("ReplicationInterface");
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Mick-gordon/Blackout-Script-Development/main/Main%20Files%20for%20the%20Butt"))()
+    local Sense = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Sirius/request/library/sense/source.lua"))()
+    local Ui = loadstring(game:HttpGet("https://raw.githubusercontent.com/Mick-gordon/Blackout-Script-Development/main/Main%20UI"))()
+    local Ui = Library
+    local LoadTime = tick()
+    -- game specific functions
+    local replication = getrenv().shared.require("ReplicationInterface");
+        
+    Sense.getWeapon = function(player)
+        local entry = player and replication.getEntry(player);
+        local object = entry and entry:getThirdPersonObject();
+        return object and object._weaponname or "Unknown";
+    end
     
-Sense.getWeapon = function(player)
-    local entry = player and replication.getEntry(player);
-    local object = entry and entry:getThirdPersonObject();
-    return object and object._weaponname or "Unknown";
-end
-
-Sense.getCharacter = function(player)
-    local entry = player and replication.getEntry(player);
-    local object = entry and entry:getThirdPersonObject();
-    return object and object:getCharacterModel();
-end
-
-Sense.getHealth = function(player)
-local entry = player and replication.getEntry(player);
-if entry and entry._alive then
-    return entry:getHealth();
-end
-return 0, 100;
-end
-
-local Loader = Library.CreateLoader(
-    "Blackout Script Development", 
-    Vector2.new(300, 300)
-)
-local Window = Library.Window(
-    "Blackout Script Development", 
-    Vector2.new(500, 620)
-)
-Window.Watermark(
-    "Blackout Script Development, By Mick Gordon#2226"
-)
---Legit tab
-local LegitTab = Window:Tab("Legit")
--- Bullet redirect
-local SectionBR = LegitTab:Section(
-    "Bullet Redirect", 
-    "Left"
-)
-SectionBR:Toggle({
-    Title = "Enable", 
-    Flag = "EnableBR",
-    Callback = function(EBR)
-        _G.SilentAim.Enabled=EBR
+    Sense.getCharacter = function(player)
+        local entry = player and replication.getEntry(player);
+        local object = entry and entry:getThirdPersonObject();
+        return object and object:getCharacterModel();
     end
-})
-SectionBR:Slider({
-    Title = "Fov", 
-    Flag = "FovBR", 
-    Symbol = "", 
-    Default = 300, 
-    Min = 0, 
-    Max = 800, 
-    Decimals = 1,
-    Callback = function(BRF)
-        _G.SilentAim.Fov=BRF
-    end
-})
-SectionBR:Toggle({
-    Title = "Draw Fov", 
-    Flag = "ShowFovBR",
-    Callback = function(SFBR)
-        _G.SilentAim.Show_Fov=SFBR
-    end
-}):
-Colorpicker({
-    Color = Library.Theme.Accent[2], 
-    Flag = "ShowFovColorBR",
-    Callback = function(BRDFC)
-        _G.SilentAim.Fov_Color=BRDFC
-    end
-})
-SectionBR:Toggle({
-    Title = "Ignore Fov", 
-    Flag = "Ignore_fov",
-    Callback = function(IFBR)
-        _G.SilentAim.Ignore_Fov=IFBR
-    end
-})
-SectionBR:Toggle({
-    Title = "Auto Shoot", 
-    Flag = "Auto_Shoot",
-    Callback = function(ASBR2)
-        _G.SilentAim.Auto_Shoot=ASBR2
-    end
-})
-SectionBR:Toggle({
-    Title = "Auto Wall", 
-    Flag = "Auto_Wall",
-    Callback = function(AWBR)
-        _G.SilentAim.Auto_Wall=AWBR
-    end
-})
-SectionBR:Dropdown({
-    Title = "Hit Scan", 
-    List = {"All","Head","Torso","Right Arm","Left Arm","Right Leg","Left Leg"}, 
-    Default = "Head", 
-    Flag = "BRH",
-    Callback = function(BRH1)
-        if BRH1=="All" then
-            _G.SilentAim.Target=GetR6Parts()
-          else
-            _G.SilentAim.Target={BRH1}
-          end
-    end
-})
-
---Aim Assist 
-local AimAssistSection = LegitTab:Section(
-    "Aim Assist", 
-    "Right"
-)
-AimAssistSection:Toggle({
-    Title = "Enable", 
-    Flag = "Enable_AimAssist",
-    Callback = function(EAA)
-        _G.AimAssist.Enabled=EAA
-    end
-})
-AimAssistSection:Toggle({
-    Title = "Visibe Check", 
-    Flag = "Visibe_Check",
-    Callback = function(VBAA)
-        _G.AimAssist.VisibleCheck=VBAA
-    end
-})
-AimAssistSection:Toggle({
-    Title = "Draw Fov", 
-    Flag = "Show_Fov_aimAss",
-    Callback = function(SFAA)
-        _G.AimAssist.Show_FOV=SFAA
-    end
-}):
-Colorpicker({
-    Color = Library.Theme.Accent[2], 
-    Flag = "FCAA",
-    Callback = function(AADFC1)
-        _G.AimAssist.FOV_Color=AADFC1
-    end
-})
-AimAssistSection:Slider({
-    Title = "Fov", 
-    Flag = "AimAssFov", 
-    Symbol = "", 
-    Default = 400, 
-    Min = 0, 
-    Max = 800, 
-    Decimals = 1,
-    Callback = function(AAF)
-        _G.AimAssist.FOV=AAF
-    end
-})
-AimAssistSection:Slider({
-    Title = "Smoothing", 
-    Flag = "AAS1", 
-    Symbol = "", 
-    Default = 10, 
-    Min = 2, 
-    Max = 50, 
-    Decimals = 0.5,
-    Callback = function(AAS)
-        _G.AimAssist.Smoothness=AAS
-    end
-})
-AimAssistSection:Dropdown({
-    Title = "Aim Assist Key", 
-    List = {"MouseButton1", "MouseButton2"}, 
-    Default = "MouseButton2", 
-    Flag = "AAK",
-    Callback = function(AAK1)
-        _G.AimAssist.Keything=AAK1
-    end
-})
-AimAssistSection:Dropdown({
-    Title = "Hit Scan", 
-    List = {"head", "torso"}, 
-    Default = "torso", 
-    Flag = "AAH",
-    Callback = function(AAH1)
-        _G.AimAssist.Target=AAH1
-    end
-})
-
---Rage Tab
-local RageTab = Window:Tab("Rage")
-local GunOptiuons = RageTab:Section(
-    "Gun Mods", 
-    "Right"
-)
-GunOptiuons:Toggle({
-    Title = "Enable", 
-    Flag = "EGM1",
-    Callback = function(EGM)
-        _G.GunOptins.Enabled=EGM
-    end
-})
-GunOptiuons:Toggle({
-    Title = "Instant Animations", 
-    Flag = "IGMA",
-    Callback = function(IRAGM)
-        _G.GunOptins.Animation=IRAGM
-        _G.GunOptins.Reset=IRAGM
-    end
-})
-GunOptiuons:Toggle({
-    Title = "No Sway", 
-    Flag = "NWGM",
-    Callback = function(GMNS)
-        _G.GunOptins.Sway=GMNS
-    end
-})
-GunOptiuons:Toggle({
-    Title = "Static X", 
-    Flag = "GMSX",
-    Callback = function(SXGM)
-        _G.GunOptins.StaticX=SXGM
-    end
-})
-GunOptiuons:Toggle({
-    Title = "Static Y", 
-    Flag = "GMSY",
-    Callback = function(SYGM)
-        _G.GunOptins.StaticY=SYGM
-    end
-})
-GunOptiuons:Toggle({
-    Title = "Static Z", 
-    Flag = "GMSZ",
-    Callback = function(SZGM)
-        _G.GunOptins.StaticZ=SZGM
-    end
-})
-
-local PlayerMovement = RageTab:Section(
-    "Player Movemnt", 
-    "Left"
-)
-PlayerMovement:Toggle({
-    Title = "Enable", 
-    Flag = "EPM",
-    Callback = function(EPM1)
-        _G.PlayerMove.Enabled=EPM1
-    end
-})
-PlayerMovement:Toggle({
-    Title = "Jump Power", 
-    Flag = "JPE1",
-    Callback = function(JPE)
-        _G.PlayerMove.JP=JPE
-    end
-})
-PlayerMovement:Slider({
-    Title = "Jump Power", 
-    Flag = "JPS", 
-    Symbol = "", 
-    Default = 40, 
-    Min = 0, 
-    Max = 250, 
-    Decimals = 1,
-    Callback = function(JPS1)
-        _G.PlayerMove.JPV=JPS1
-    end
-})
-PlayerMovement:Toggle({
-    Title = "Walk Speed", 
-    Flag = "WSPGM",
-    Callback = function(WSPM)
-        _G.PlayerMove.WS=WSPM
-    end
-})
-PlayerMovement:Slider({
-    Title = "Walk Speed", 
-    Flag = "JPS23s", 
-    Symbol = "", 
-    Default = 16, 
-    Min = 0, 
-    Max = 100, 
-    Decimals = 1,
-    Callback = function(JPS1)
-        _G.PlayerMove.WSV=JPS1
-    end
-})
-
--- Visuals Tab
-
-local VisualsTab = Window:Tab("Visuals")
-local ESPSec = VisualsTab:Section(
-    "ESP", 
-    "Left"
-)
-ESPSec:Toggle({
-    Title = "Enable", 
-    Flag = "EESP",
-    Callback = function(EEvcSP1)
-        Sense.teamSettings.enemy.enabled=EEvcSP1
-    end
-})
-ESPSec:Toggle({
-    Title = "Draw Boxes", 
-    Flag = "DBESPs",
-    Callback = function(DBEfdSP)
-        Sense.teamSettings.enemy.box=DBEfdSP
-    end
-}):
-Colorpicker({
-    Color = Library.Theme.Accent[2], 
-    Flag = "Toggle2Color",
-    Callback = function(EESP1)
-        Sense.teamSettings.enemy.boxColor[1] =EESP1
-    end
-})
-ESPSec:Toggle({
-    Title = "Fill Boxes", 
-    Flag = "FBESP",
-    Callback = function(FBESP1)
-        Sense.teamSettings.enemy.boxFill=FBESP1
-    end
-}):
-Colorpicker({
-    Color = Library.Theme.Accent[2], 
-    Flag = "Toggle3Color",
-    Callback = function(EESPColor)
-        Sense.teamSettings.enemy.boxFillColor[1]=EESPColor
-    end
-})
-ESPSec:Toggle({
-    Title = "Draw Health Bar", 
-    Flag = "DHB2",
-    Callback = function(DHB2f)
-        Sense.teamSettings.enemy.healthBar=DHB2f
-    end
-})
-ESPSec:Toggle({
-    Title = "Health Text", 
-    Flag = "HTESP",
-    Callback = function(HTESP23)
-        Sense.teamSettings.enemy.healthText=HTESP23
-    end
-}):
-Colorpicker({
-    Color = Library.Theme.Accent[2], 
-    Flag = "HTESP6",
-    Callback = function(ESPTColor)
-        Sense.teamSettings.enemy.healthTextColor[1]=ESPTColor
-    end
-})
-ESPSec:Toggle({
-    Title = "Box 3D", 
-    Flag = "BthreeD",
-    Callback = function(BTd)
-        Sense.teamSettings.enemy.box3d=BTd
-    end
-}):
-Colorpicker({
-    Color = Library.Theme.Accent[2], 
-    Flag = "HTESPf6",
-    Callback = function(ESdsPTColor)
-        Sense.teamSettings.enemy.box3dColor[1]=ESdsPTColor
-    end
-})
-ESPSec:Toggle({
-    Title = "Draw Name", 
-    Flag = "DNC",
-    Callback = function(DNColor)
-        Sense.teamSettings.enemy.name=DNColor
-    end
-}):
-Colorpicker({
-    Color = Library.Theme.Accent[2], 
-    Flag = "DNC",
-    Callback = function(DNCesp)
-        Sense.teamSettings.enemy.nameColor[1]=DNCesp
-    end
-})
-ESPSec:Toggle({
-    Title = "Draw Gun", 
-    Flag = "DGC",
-    Callback = function(DGESP)
-        Sense.teamSettings.enemy.weapon=DGESP
-    end
-}):
-Colorpicker({
-    Color = Library.Theme.Accent[2], 
-    Flag = "DGColor",
-    Callback = function(DGcolorfd)
-        Sense.teamSettings.enemy.weaponColor[1]=DGcolorfd
-    end
-})
-ESPSec:Toggle({
-    Title = "Draw Tracers", 
-    Flag = "DGdC",
-    Callback = function(DTESP)
-        Sense.teamSettings.enemy.tracer=DTESP
-    end
-}):
-Colorpicker({
-    Color = Library.Theme.Accent[2], 
-    Flag = "DGColor",
-    Callback = function(DGcfdfdolor)
-        Sense.teamSettings.enemy.tracerColor[1]=DGcfdfdolor
-    end
-})
-ESPSec:Dropdown({
-    Title = "Tracer Origin", 
-    List = {"Bottom", "Middle" ,"Top"}, 
-    Default = "Bottom", 
-    Flag = "DropDown_123",
-    Callback = function(TracerOrigon1)
-        Sense.teamSettings.enemy.tracerOrigin=TracerOrigon1
-    end
-})
-ESPSec:Toggle({
-    Title = "Draw Off Screen Arrow", 
-    Flag = "DOFAES",
-    Callback = function(DOFAESp)
-        Sense.teamSettings.enemy.offScreenArrow=DOFAESp
-    end
-}):
-Colorpicker({
-    Color = Library.Theme.Accent[2], 
-    Flag = "DGColofdfr",
-    Callback = function(DGColofdfrsf)
-        Sense.teamSettings.enemy.offScreenArrowColor[1]=DGColofdfrsf
-    end
-})
-ESPSec:Slider({
-    Title = "Arrow Size", 
-    Flag = "OFAS", 
-    Symbol = "", 
-    Default = 15, 
-    Min = 0, 
-    Max = 100, 
-    Decimals = 1,
-    Callback = function(dsafsfs)
-        Sense.teamSettings.enemy.offScreenArrowSize=dsafsfs
-    end
-})
-ESPSec:Slider({
-    Title = "Arrow Radius", 
-    Flag = "OAR", 
-    Symbol = "", 
-    Default = 150, 
-    Min = 0, 
-    Max = 2000, 
-    Decimals = 1,
-    Callback = function(vfdsvcx)
-        Sense.teamSettings.enemy.offScreenArrowRadius=vfdsvcx
-    end
-})
-
-local ChamsSection = VisualsTab:Section(
-    "Section1", 
-    "Right"
-)
-ChamsSection:Toggle({
-    Title = "Toggle2", 
-    Flag = "Toggle_2"
     
-}):
-Colorpicker({
-    Color = Library.Theme.Accent[2], 
-    Flag = "Toggle2Color"
-})
-
-
-local WorldVisualsSection = VisualsTab:Section(
-    "Section1", 
-    "Right"
-)
-ChamsSection:Toggle({
-    Title = "Draw Chams", 
-    Flag = "DrAWCHAMS1",
-    Callback = function(fdsfsd)
-        _G.chams.Enabled=fdsfsd
+    Sense.getHealth = function(player)
+    local entry = player and replication.getEntry(player);
+    if entry and entry._alive then
+        return entry:getHealth();
     end
-})
-ChamsSection:Colorpicker({
-    Title = "Visible Color",
-    Color = Library.Theme.Accent[2], 
-    Flag = "DCVC",
-    Callback = function(fdsffsd)
-        _G.chams.IsVisiblein=fdsffsd
+    return 0, 100;
     end
-})
-ChamsSection:Toggle({
-    Title = "Change Hiden Color", 
-    Flag = "DHCH",
-    Callback = function(fdsfdsdsd)
-        _G.chams.ShowHidden=fdsfdsdsd
-    end
-})
-:Colorpicker({
-    Title = "Hidden Color",
-    Color = Library.Theme.Accent[2], 
-    Flag = "CHHC",
-    Callback = function(fdsffcvsd)
-        _G.chams.IsNotVisible=fdsffcvsd
-    end
-})
-ChamsSection:Slider({
-    Title = "Chams Transparency", 
-    Flag = "CTransparency1", 
-    Symbol = "", 
-    Default = 0.5, 
-    Min = 0, 
-    Max = 1, 
-    Decimals = 0.01,
-    Callback = function(ctone)
-        _G.chams.Transparency=ctone
-    end
-})
-
-
-
--- Other Tab
-
-local OtherTab = Window:Tab("Other")
-
-Window:AddSettingsTab()
-
-Window:SwitchTab(LegitTab)
-
-Window.ToggleAnime(false)
-
-LoadTime = math.floor((tick() - LoadTime) * 1000)
-
-Sense.Load()
+    
+    local Loader = Library.CreateLoader(
+        "Blackout Script Development", 
+        Vector2.new(300, 300)
+    )
+    local Window = Library.Window(
+        "Blackout Script Development", 
+        Vector2.new(500, 620)
+    )
+    Window.Watermark(
+        "Blackout Script Development, By Mick Gordon#2226"
+    )
+    --Legit tab
+    local LegitTab = Window:Tab("Legit")
+    -- Bullet redirect
+    local SectionBR = LegitTab:Section(
+        "Bullet Redirect", 
+        "Left"
+    )
+    SectionBR:Toggle({
+        Title = "Enable", 
+        Flag = "EnableBR",
+        Callback = function(EBR)
+            _G.SilentAim.Enabled=EBR
+        end
+    })
+    SectionBR:Slider({
+        Title = "Fov", 
+        Flag = "FovBR", 
+        Symbol = "", 
+        Default = 300, 
+        Min = 0, 
+        Max = 800, 
+        Decimals = 1,
+        Callback = function(BRF)
+            _G.SilentAim.Fov=BRF
+        end
+    })
+    SectionBR:Toggle({
+        Title = "Draw Fov", 
+        Flag = "ShowFovBR",
+        Callback = function(SFBR)
+            _G.SilentAim.Show_Fov=SFBR
+        end
+    }):
+    Colorpicker({
+        Color = Library.Theme.Accent[2], 
+        Flag = "ShowFovColorBR",
+        Callback = function(BRDFC)
+            _G.SilentAim.Fov_Color=BRDFC
+        end
+    })
+    SectionBR:Toggle({
+        Title = "Ignore Fov", 
+        Flag = "Ignore_fov",
+        Callback = function(IFBR)
+            _G.SilentAim.Ignore_Fov=IFBR
+        end
+    })
+    SectionBR:Toggle({
+        Title = "Auto Shoot", 
+        Flag = "Auto_Shoot",
+        Callback = function(ASBR2)
+            _G.SilentAim.Auto_Shoot=ASBR2
+        end
+    })
+    SectionBR:Toggle({
+        Title = "Auto Wall", 
+        Flag = "Auto_Wall",
+        Callback = function(AWBR)
+            _G.SilentAim.Auto_Wall=AWBR
+        end
+    })
+    SectionBR:Dropdown({
+        Title = "Hit Scan", 
+        List = {"All","Head","Torso","Right Arm","Left Arm","Right Leg","Left Leg"}, 
+        Default = "Head", 
+        Flag = "BRH",
+        Callback = function(BRH1)
+            if BRH1=="All" then
+                _G.SilentAim.Target=GetR6Parts()
+              else
+                _G.SilentAim.Target={BRH1}
+              end
+        end
+    })
+    
+    --Aim Assist 
+    local AimAssistSection = LegitTab:Section(
+        "Aim Assist", 
+        "Right"
+    )
+    AimAssistSection:Toggle({
+        Title = "Enable", 
+        Flag = "Enable_AimAssist",
+        Callback = function(EAA)
+            _G.AimAssist.Enabled=EAA
+        end
+    })
+    AimAssistSection:Toggle({
+        Title = "Visibe Check", 
+        Flag = "Visibe_Check",
+        Callback = function(VBAA)
+            _G.AimAssist.VisibleCheck=VBAA
+        end
+    })
+    AimAssistSection:Toggle({
+        Title = "Draw Fov", 
+        Flag = "Show_Fov_aimAss",
+        Callback = function(SFAA)
+            _G.AimAssist.Show_FOV=SFAA
+        end
+    }):
+    Colorpicker({
+        Color = Library.Theme.Accent[2], 
+        Flag = "FCAA",
+        Callback = function(AADFC1)
+            _G.AimAssist.FOV_Color=AADFC1
+        end
+    })
+    AimAssistSection:Slider({
+        Title = "Fov", 
+        Flag = "AimAssFov", 
+        Symbol = "", 
+        Default = 400, 
+        Min = 0, 
+        Max = 800, 
+        Decimals = 1,
+        Callback = function(AAF)
+            _G.AimAssist.FOV=AAF
+        end
+    })
+    AimAssistSection:Slider({
+        Title = "Smoothing", 
+        Flag = "AAS1", 
+        Symbol = "", 
+        Default = 10, 
+        Min = 2, 
+        Max = 50, 
+        Decimals = 0.5,
+        Callback = function(AAS)
+            _G.AimAssist.Smoothness=AAS
+        end
+    })
+    AimAssistSection:Dropdown({
+        Title = "Aim Assist Key", 
+        List = {"MouseButton1", "MouseButton2"}, 
+        Default = "MouseButton2", 
+        Flag = "AAK",
+        Callback = function(AAK1)
+            _G.AimAssist.Keything=AAK1
+        end
+    })
+    AimAssistSection:Dropdown({
+        Title = "Hit Scan", 
+        List = {"head", "torso"}, 
+        Default = "torso", 
+        Flag = "AAH",
+        Callback = function(AAH1)
+            _G.AimAssist.Target=AAH1
+        end
+    })
+    
+    --Rage Tab
+    local RageTab = Window:Tab("Rage")
+    local GunOptiuons = RageTab:Section(
+        "Gun Mods", 
+        "Right"
+    )
+    GunOptiuons:Toggle({
+        Title = "Enable", 
+        Flag = "EGM1",
+        Callback = function(EGM)
+            _G.GunOptins.Enabled=EGM
+        end
+    })
+    GunOptiuons:Toggle({
+        Title = "Instant Animations", 
+        Flag = "IGMA",
+        Callback = function(IRAGM)
+            _G.GunOptins.Animation=IRAGM
+            _G.GunOptins.Reset=IRAGM
+        end
+    })
+    GunOptiuons:Toggle({
+        Title = "No Sway", 
+        Flag = "NWGM",
+        Callback = function(GMNS)
+            _G.GunOptins.Sway=GMNS
+        end
+    })
+    GunOptiuons:Toggle({
+        Title = "Static X", 
+        Flag = "GMSX",
+        Callback = function(SXGM)
+            _G.GunOptins.StaticX=SXGM
+        end
+    })
+    GunOptiuons:Toggle({
+        Title = "Static Y", 
+        Flag = "GMSY",
+        Callback = function(SYGM)
+            _G.GunOptins.StaticY=SYGM
+        end
+    })
+    GunOptiuons:Toggle({
+        Title = "Static Z", 
+        Flag = "GMSZ",
+        Callback = function(SZGM)
+            _G.GunOptins.StaticZ=SZGM
+        end
+    })
+    
+    local PlayerMovement = RageTab:Section(
+        "Player Movemnt", 
+        "Left"
+    )
+    PlayerMovement:Toggle({
+        Title = "Enable", 
+        Flag = "EPM",
+        Callback = function(EPM1)
+            _G.PlayerMove.Enabled=EPM1
+        end
+    })
+    PlayerMovement:Toggle({
+        Title = "Jump Power", 
+        Flag = "JPE1",
+        Callback = function(JPE)
+            _G.PlayerMove.JP=JPE
+        end
+    })
+    PlayerMovement:Slider({
+        Title = "Jump Power", 
+        Flag = "JPS", 
+        Symbol = "", 
+        Default = 40, 
+        Min = 0, 
+        Max = 250, 
+        Decimals = 1,
+        Callback = function(JPS1)
+            _G.PlayerMove.JPV=JPS1
+        end
+    })
+    PlayerMovement:Toggle({
+        Title = "Walk Speed", 
+        Flag = "WSPGM",
+        Callback = function(WSPM)
+            _G.PlayerMove.WS=WSPM
+        end
+    })
+    PlayerMovement:Slider({
+        Title = "Walk Speed", 
+        Flag = "JPS23s", 
+        Symbol = "", 
+        Default = 16, 
+        Min = 0, 
+        Max = 100, 
+        Decimals = 1,
+        Callback = function(JPS1)
+            _G.PlayerMove.WSV=JPS1
+        end
+    })
+    
+    -- Visuals Tab
+    
+    local VisualsTab = Window:Tab("Visuals")
+    local ESPSec = VisualsTab:Section(
+        "ESP", 
+        "Left"
+    )
+    ESPSec:Toggle({
+        Title = "Enable", 
+        Flag = "EESP",
+        Callback = function(EEvcSP1)
+            Sense.teamSettings.enemy.enabled=EEvcSP1
+        end
+    })
+    ESPSec:Toggle({
+        Title = "Draw Boxes", 
+        Flag = "DBESPs",
+        Callback = function(DBEfdSP)
+            Sense.teamSettings.enemy.box=DBEfdSP
+        end
+    }):
+    Colorpicker({
+        Color = Library.Theme.Accent[2], 
+        Flag = "Toggle2Color",
+        Callback = function(EESP1)
+            Sense.teamSettings.enemy.boxColor[1] =EESP1
+        end
+    })
+    ESPSec:Toggle({
+        Title = "Fill Boxes", 
+        Flag = "FBESP",
+        Callback = function(FBESP1)
+            Sense.teamSettings.enemy.boxFill=FBESP1
+        end
+    }):
+    Colorpicker({
+        Color = Library.Theme.Accent[2], 
+        Flag = "Toggle3Color",
+        Callback = function(EESPColor)
+            Sense.teamSettings.enemy.boxFillColor[1]=EESPColor
+        end
+    })
+    ESPSec:Toggle({
+        Title = "Draw Health Bar", 
+        Flag = "DHB2",
+        Callback = function(DHB2f)
+            Sense.teamSettings.enemy.healthBar=DHB2f
+        end
+    })
+    ESPSec:Toggle({
+        Title = "Health Text", 
+        Flag = "HTESP",
+        Callback = function(HTESP23)
+            Sense.teamSettings.enemy.healthText=HTESP23
+        end
+    }):
+    Colorpicker({
+        Color = Library.Theme.Accent[2], 
+        Flag = "HTESP6",
+        Callback = function(ESPTColor)
+            Sense.teamSettings.enemy.healthTextColor[1]=ESPTColor
+        end
+    })
+    ESPSec:Toggle({
+        Title = "Box 3D", 
+        Flag = "BthreeD",
+        Callback = function(BTd)
+            Sense.teamSettings.enemy.box3d=BTd
+        end
+    }):
+    Colorpicker({
+        Color = Library.Theme.Accent[2], 
+        Flag = "HTESPf6",
+        Callback = function(ESdsPTColor)
+            Sense.teamSettings.enemy.box3dColor[1]=ESdsPTColor
+        end
+    })
+    ESPSec:Toggle({
+        Title = "Draw Name", 
+        Flag = "DNC",
+        Callback = function(DNColor)
+            Sense.teamSettings.enemy.name=DNColor
+        end
+    }):
+    Colorpicker({
+        Color = Library.Theme.Accent[2], 
+        Flag = "DNC",
+        Callback = function(DNCesp)
+            Sense.teamSettings.enemy.nameColor[1]=DNCesp
+        end
+    })
+    ESPSec:Toggle({
+        Title = "Draw Gun", 
+        Flag = "DGC",
+        Callback = function(DGESP)
+            Sense.teamSettings.enemy.weapon=DGESP
+        end
+    }):
+    Colorpicker({
+        Color = Library.Theme.Accent[2], 
+        Flag = "DGColor",
+        Callback = function(DGcolorfd)
+            Sense.teamSettings.enemy.weaponColor[1]=DGcolorfd
+        end
+    })
+    ESPSec:Toggle({
+        Title = "Draw Tracers", 
+        Flag = "DGdC",
+        Callback = function(DTESP)
+            Sense.teamSettings.enemy.tracer=DTESP
+        end
+    }):
+    Colorpicker({
+        Color = Library.Theme.Accent[2], 
+        Flag = "DGColor",
+        Callback = function(DGcfdfdolor)
+            Sense.teamSettings.enemy.tracerColor[1]=DGcfdfdolor
+        end
+    })
+    ESPSec:Dropdown({
+        Title = "Tracer Origin", 
+        List = {"Bottom", "Middle" ,"Top"}, 
+        Default = "Bottom", 
+        Flag = "DropDown_123",
+        Callback = function(TracerOrigon1)
+            Sense.teamSettings.enemy.tracerOrigin=TracerOrigon1
+        end
+    })
+    ESPSec:Toggle({
+        Title = "Draw Off Screen Arrow", 
+        Flag = "DOFAES",
+        Callback = function(DOFAESp)
+            Sense.teamSettings.enemy.offScreenArrow=DOFAESp
+        end
+    }):
+    Colorpicker({
+        Color = Library.Theme.Accent[2], 
+        Flag = "DGColofdfr",
+        Callback = function(DGColofdfrsf)
+            Sense.teamSettings.enemy.offScreenArrowColor[1]=DGColofdfrsf
+        end
+    })
+    ESPSec:Slider({
+        Title = "Arrow Size", 
+        Flag = "OFAS", 
+        Symbol = "", 
+        Default = 15, 
+        Min = 0, 
+        Max = 100, 
+        Decimals = 1,
+        Callback = function(dsafsfs)
+            Sense.teamSettings.enemy.offScreenArrowSize=dsafsfs
+        end
+    })
+    ESPSec:Slider({
+        Title = "Arrow Radius", 
+        Flag = "OAR", 
+        Symbol = "", 
+        Default = 150, 
+        Min = 0, 
+        Max = 2000, 
+        Decimals = 1,
+        Callback = function(vfdsvcx)
+            Sense.teamSettings.enemy.offScreenArrowRadius=vfdsvcx
+        end
+    })
+    
+    local WorldVisualsSection = VisualsTab:Section(
+        "Section1", 
+        "Right"
+    )
+    ChamsSection:Toggle({
+        Title = "Draw Chams", 
+        Flag = "DrAWCHAMS1",
+        Callback = function(fdsfsd)
+            _G.chams.Enabled=fdsfsd
+        end
+    })
+    ChamsSection:Colorpicker({
+        Title = "Visible Color",
+        Color = Library.Theme.Accent[2], 
+        Flag = "DCVC",
+        Callback = function(fdsffsd)
+            _G.chams.IsVisiblein=fdsffsd
+        end
+    })
+    ChamsSection:Toggle({
+        Title = "Change Hiden Color", 
+        Flag = "DHCH",
+        Callback = function(fdsfdsdsd)
+            _G.chams.ShowHidden=fdsfdsdsd
+        end
+    })
+    :Colorpicker({
+        Title = "Hidden Color",
+        Color = Library.Theme.Accent[2], 
+        Flag = "CHHC",
+        Callback = function(fdsffcvsd)
+            _G.chams.IsNotVisible=fdsffcvsd
+        end
+    })
+    ChamsSection:Slider({
+        Title = "Chams Transparency", 
+        Flag = "CTransparency1", 
+        Symbol = "", 
+        Default = 0.5, 
+        Min = 0, 
+        Max = 1, 
+        Decimals = 0.01,
+        Callback = function(ctone)
+            _G.chams.Transparency=ctone
+        end
+    })
+    
+    
+    
+    -- Other Tab
+    
+    local OtherTab = Window:Tab("Other")
+    
+    Window:AddSettingsTab()
+    
+    Window:SwitchTab(LegitTab)
+    
+    Window.ToggleAnime(false)
+    
+    LoadTime = math.floor((tick() - LoadTime) * 1000)
+    
+    Sense.Load() 
 ]])
