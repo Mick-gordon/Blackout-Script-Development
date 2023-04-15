@@ -582,6 +582,7 @@ end)()
 game.RunService.RenderStepped:Connect(function()
     if _G.chams.ShowHidden == false then
         _G.chams.IsNotVisible = _G.chams.IsVisiblein
+    end 
 end) 
 local plr = game.Players.LocalPlayer
 local l_character = plr.Character or plr.CharacterAdded:wait()
