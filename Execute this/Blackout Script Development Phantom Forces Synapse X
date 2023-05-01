@@ -457,54 +457,6 @@ syn.run_on_actor(getactors()[1], [[
         end
     })
     
-    local WorldVisualsSection = VisualsTab:Section(
-        "Section1", 
-        "Right"
-    )
-    ChamsSection:Toggle({
-        Title = "Draw Chams", 
-        Flag = "DrAWCHAMS1",
-        Callback = function(fdsfsd)
-            _G.chams.Enabled=fdsfsd
-        end
-    })
-    ChamsSection:Colorpicker({
-        Title = "Visible Color",
-        Color = Library.Theme.Accent[2], 
-        Flag = "DCVC",
-        Callback = function(fdsffsd)
-            _G.chams.IsVisiblein=fdsffsd
-        end
-    })
-    ChamsSection:Toggle({
-        Title = "Change Hiden Color", 
-        Flag = "DHCH",
-        Callback = function(fdsfdsdsd)
-            _G.chams.ShowHidden=fdsfdsdsd
-        end
-    })
-    :Colorpicker({
-        Title = "Hidden Color",
-        Color = Library.Theme.Accent[2], 
-        Flag = "CHHC",
-        Callback = function(fdsffcvsd)
-            _G.chams.IsNotVisible=fdsffcvsd
-        end
-    })
-    ChamsSection:Slider({
-        Title = "Chams Transparency", 
-        Flag = "CTransparency1", 
-        Symbol = "", 
-        Default = 0.5, 
-        Min = 0, 
-        Max = 1, 
-        Decimals = 0.01,
-        Callback = function(ctone)
-            _G.chams.Transparency=ctone
-        end
-    })
-    
-    
     
     -- Other Tab
     
