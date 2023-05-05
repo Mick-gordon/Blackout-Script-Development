@@ -1,0 +1,46 @@
+local BOSD = {
+    Aim ={
+        AimAssist = {
+            Enabled   = false,
+            Target  ="torso",
+            VisibleCheck = false,
+            Smoothness = 10,
+            FOV = 400,
+            Show_FOV = false,
+            FOV_Color = Color3.fromRGB(75,0,130), 
+            Keything = "MouseButton2",
+        },
+        BulletRedirect = {
+            Enabled = false,
+            Target = {"Head"},
+            Auto_Shoot = false,
+            Auto_Wall = false,
+            Fov = 300,
+            Show_Fov = false,
+            Fov_Color = Color3.fromRGB(102, 0, 101),
+            Ignore_Fov = false,
+            GunName = "Cant Find The Gun!!!!!",
+        }
+    },
+
+    Visuals={
+        Chams={
+            Enabled=false,
+            ShowHidden = false,
+            IsVisiblein=Color3.fromRGB(0, 255, 255),
+            IsNotVisible=Color3.fromRGB(75,0,130),
+            Transparency = 0.5,
+        },
+        World_Color={
+            Enabled = false,
+            Color = Color3.fromRGB(43, 42, 43),
+            Matt = "Smooth Plastic",
+        },
+        Ambient={
+            Enabled = false,
+            OutdoorAmbient = Color3.fromRGB(255, 2555, 255),
+            Ambient = Color3.fromRGB(255, 2555, 255),
+        },
+    }
+
+}
